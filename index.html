@@ -1,34 +1,84 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Benim Favorilerim</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Benim Modern Web Sitem</title>
   <style>
-   <style>
-  body {
-    background-color: #007BFF; /* Mavi arka plan */
-    color: #ffffff;            /* Beyaz yazı */
-  } 
+    /* Sayfa sıfırlaması */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0047ab, #1e90ff);
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+      line-height: 1.6;
+      user-select: none;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      color: #ffd700;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    }
+    
+    p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+    
+    a {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #ffd700;
+      color: #0047ab;
+      font-weight: 700;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      user-select: text;
+    }
+    
+    a:hover {
+      background-color: #e6c200;
+      color: #002966;
+      transform: scale(1.05);
+    }
+    
+    /* Responsive (mobil uyumlu) */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      a {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Benim Favorilerim</h1>
-  <p>Selam, ben <strong>brs6211118</strong></p>
-
-  <h2>🎬 Favori Filmlerim</h2>
-  <ul>
-    <li>Fight Club</li>
-    <li>Matrix</li>
-    <li>Gora</li>
-  </ul>
-
-  <h2>🎵 Favori Müziklerim</h2>
-  <ul>
-    <li>Pink Floyd - Comfortably Numb</li>
-    <li>Barış Manço - Dönence</li>
-    <li>Tarkan - Kuzu Kuzu</li>
-  </ul>
-
-  <img src="https://i.imgur.com/5cLDe1M.jpeg" alt="Favori görselim">
+  <h1>Benim Modern Web Sitem</h1>
+  <p>Hoş geldin! Bu sayfa canlı mavi arka plan ve şık tasarımla hazırlandı.</p>
+  <p>Daha fazla içerik, müzik ve görseller yakında eklenecek. Takipte kal!</p>
+  <a href="https://github.com/brs6211118/BEN-M-FAVOR-LER-M" target="_blank" rel="noopener noreferrer">GitHub Repo'ya Git</a>
 </body>
 </html>
