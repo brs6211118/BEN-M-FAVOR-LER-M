@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ali Barış Vinç</title>
+  <title>Kürtler Sofrası Vinç</title>
   <style>
     * {
       margin: 0;
@@ -11,13 +12,14 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #d0e7ff; /* Açık mavi */
+      background: #a8c6ff; /* Hoş mavi arka plan */
       color: #222;
       scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     header {
-      background: #0055aa;
-
+      background: #003a75;
       color: white;
       padding: 20px 40px;
       display: flex;
@@ -27,99 +29,157 @@
       width: 100%;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     nav a {
       color: white;
       text-decoration: none;
-      margin-left: 20px;
-      font-weight: bold;
+      margin-left: 25px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffd500; /* Sarı vurgu */
     }
     section {
-      padding: 100px 30px 60px;
+      padding: 120px 40px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .hero {
       text-align: center;
-      padding-top: 150px;
+      padding-top: 120px;
+      margin-bottom: 60px;
     }
     .hero h1 {
-      font-size: 3rem;
-      color: #003d7a;
+      font-size: 3.8rem;
+      color: #003a75;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       margin-top: 20px;
-      max-width: 600px;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      color: #444;
+      line-height: 1.6;
     }
     .team, .catalog, .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
     }
     .team-member, .product, .catalog-item {
       background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-member:hover, .product:hover, .catalog-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
     }
     .team-member h3, .product h4, .catalog-item h4 {
-      color: #0055aa;
-      margin-bottom: 8px;
+      color: #ffd500; /* Sarı renk başlık */
+      margin-bottom: 12px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .team-member p, .product p, .catalog-item p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.5;
     }
     .product img, .catalog-item img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+      transition: filter 0.3s ease;
+    }
+    .product img:hover, .catalog-item img:hover {
+      filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.25));
     }
     form {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 40px auto 0;
       background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 35px 40px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
     }
     input, textarea {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
+      padding: 14px;
+      margin: 15px 0;
+      border: 1.8px solid #ccc;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: border-color 0.3s ease;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus {
+      border-color: #ffd500;
+      outline: none;
+      box-shadow: 0 0 8px #ffd500aa;
     }
     button {
-      padding: 12px 24px;
-      background: #0055aa;
-      color: white;
+      width: 100%;
+      padding: 15px;
+      background: #ffd500;
+      color: #003a75;
       border: none;
-      border-radius: 6px;
-      font-size: 1rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 700;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+      letter-spacing: 0.05em;
+    }
+    button:hover {
+      background-color: #e6c800;
     }
     footer {
-      background: #003d7a;
+      background: #003a75;
       color: white;
       text-align: center;
-      padding: 30px 10px;
+      padding: 35px 10px;
       margin-top: 60px;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      box-shadow: inset 0 8px 10px -8px rgba(0,0,0,0.5);
     }
     iframe {
       width: 100%;
-      height: 315px;
+      max-width: 900px;
+      height: 360px;
       margin-top: 30px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      transition: transform 0.3s ease;
+    }
+    iframe:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
     }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>Ali Barış Vinç</strong></div>
+    <div><strong>Kürtler Sofrası Vinç</strong></div>
     <nav>
       <a href="#hero">Anasayfa</a>
       <a href="#products">Ürünler</a>
@@ -131,104 +191,43 @@
   </header>
 
   <section id="hero" class="hero">
-    <h1>Kamyon Üstü Vinç İmalatında Güven</h1>
-    <p>Ali Barış Vinç, yüksek kaliteli ve dayanıklı kamyon üstü vinçler üreterek sektörün lideri olmayı hedefler.</p>
+    <h1>Kamyon Üstü Vinç İmalatında Güvenin Adı</h1>
+    <p>Kürtler Sofrası Vinç, yüksek kaliteli ve dayanıklı kamyon üstü vinçler üreterek sektörde öncü olmaya devam ediyor.</p>
   </section>
 
   <section id="products">
-    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Ürünlerimiz</h2>
+    <h2 style="text-align:center; color:#003a75; margin-bottom:40px;">Ürünlerimiz</h2>
     <div class="products">
       <div class="product">
-        <img src="https://images.unsplash.com/photo-1612023029976-b487aa6e7d10?auto=format&fit=crop&w=600&q=80" alt="Vinç A" />
-        <h4>Model A</h4>
-        <p>5 ton kaldırma kapasitesi, 12m uzanma. Hafif ve verimli kullanım.</p>
+        <img src="https://images.unsplash.com/photo-1612023029976-b487aa6e7d10?auto=format&fit=crop&w=800&q=90" alt="Vinç Model A" />
+        <h4>Model A - 5 Ton</h4>
+        <p>5 ton kaldırma kapasitesi, 12m uzanma. Hafif ve verimli kullanım için tasarlandı.</p>
       </div>
       <div class="product">
-        <img src="https://images.unsplash.com/photo-1597272613280-e0dbdd0c5202?auto=format&fit=crop&w=600&q=80" alt="Vinç B" />
-        <h4>Model B</h4>
-        <p>10 ton kaldırma kapasitesi, 18m uzanma. Endüstriyel projelere uygun.</p>
+        <img src="https://images.unsplash.com/photo-1597272613280-e0dbdd0c5202?auto=format&fit=crop&w=800&q=90" alt="Vinç Model B" />
+        <h4>Model B - 10 Ton</h4>
+        <p>10 ton kaldırma kapasitesi, 18m uzanma. Endüstriyel projeler için ideal çözüm.</p>
       </div>
       <div class="product">
-        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80" alt="Vinç C" />
-        <h4>Model C</h4>
-        <p>20 ton kaldırma kapasitesi, 25m erişim. Ağır sanayiye özel.</p>
+        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=800&q=90" alt="Vinç Model C" />
+        <h4>Model C - 20 Ton</h4>
+        <p>20 ton kaldırma kapasitesi, 25m erişim. Ağır sanayi ve büyük ölçekli projeler için tasarlandı.</p>
       </div>
     </div>
   </section>
 
   <section id="catalog">
-    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Kaldırma Kapasitesi & Teknik Katalog</h2>
+    <h2 style="text-align:center; color:#003a75; margin-bottom:40px;">Kaldırma Kapasitesi & Teknik Katalog</h2>
     <div class="catalog">
       <div class="catalog-item">
-        <img src="https://images.unsplash.com/photo-1617957741602-54f3b3dc80aa?auto=format&fit=crop&w=800&q=80" alt="Model A diyagramı">
+        <img src="https://images.unsplash.com/photo-1617957741602-54f3b3dc80aa?auto=format&fit=crop&w=900&q=90" alt="Model A diyagramı" />
         <h4>Model A Teknik Detay</h4>
         <p>5 ton kaldırma / Maks. 12 metre. Kullanım alanı: Şantiye içi, dar alanlar.</p>
       </div>
       <div class="catalog-item">
-        <img src="https://images.unsplash.com/photo-1615412882436-7275a6e032c0?auto=format&fit=crop&w=800&q=80" alt="Model B diyagramı">
+        <img src="https://images.unsplash.com/photo-1615412882436-7275a6e032c0?auto=format&fit=crop&w=900&q=90" alt="Model B diyagramı" />
         <h4>Model B Teknik Detay</h4>
         <p>10 ton kaldırma / Maks. 18 metre. Kullanım alanı: Lojistik ve taşımacılık.</p>
       </div>
       <div class="catalog-item">
-        <img src="https://images.unsplash.com/photo-1628179056595-593bd8226e62?auto=format&fit=crop&w=800&q=80" alt="Model C diyagramı">
-        <h4>Model C Teknik Detay</h4>
-        <p>20 ton kaldırma / Maks. 25 metre. Ağır sanayi ve büyük ölçekli projeler.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="team">
-    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Ekibimiz</h2>
-    <div class="team">
-      <div class="team-member">
-        <h3>Ali</h3>
-        <p>CEO - Genel Müdür</p>
-      </div>
-      <div class="team-member">
-        <h3>Barış</h3>
-        <p>CTO - Teknik Müdür</p>
-      </div>
-      <div class="team-member">
-        <h3>Eşref</h3>
-        <p>Yazılım Geliştirici</p>
-      </div>
-      <div class="team-member">
-        <h3>Mevlüt</h3>
-        <p>CNC Operatörü</p>
-      </div>
-      <div class="team-member">
-        <h3>Esat</h3>
-        <p>Yatırımcı</p>
-      </div>
-      <div class="team-member">
-        <h3>Fehmi</h3>
-        <p>Güvenlik & İstihbarat</p>
-      </div>
-      <div class="team-member">
-        <h3>Eyyüp</h3>
-        <p>Müzisyen</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="video">
-    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Tanıtım Videomuz</h2>
-    <iframe src="https://www.youtube.com/embed/x6tDgf1xuXg" title="Firma Tanıtım Videosu" allowfullscreen></iframe>
-  </section>
-
-  <section id="iletisim">
-    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">İletişim</h2>
-    <form>
-      <input type="text" placeholder="Ad Soyad" required />
-      <input type="email" placeholder="E-posta Adresi" required />
-      <textarea rows="5" placeholder="Mesajınız" required></textarea>
-      <button type="submit">Gönder</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Ali Barış Vinç | Tüm Hakları Saklıdır.</p>
-  </footer>
-</body>
-</html>
-<!DOCTYPE html> 
+        <img
