@@ -1,84 +1,234 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Benim Modern Web Sitem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ali Barış Vinç</title>
   <style>
-    /* Sayfa sıfırlaması */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
     body {
-      background: linear-gradient(135deg, #0047ab, #1e90ff);
-      color: #f0f0f0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
+      background: #d0e7ff; /* Açık mavi */
+      color: #222;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: #0055aa;
+
+      color: white;
+      padding: 20px 40px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      padding: 40px 20px;
-      text-align: center;
-      line-height: 1.6;
-      user-select: none;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 15px;
-      color: #ffd700;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-    }
-    
-    p {
-      font-size: 1.25rem;
-      max-width: 600px;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-    
-    a {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #ffd700;
-      color: #0047ab;
-      font-weight: 700;
-      border-radius: 30px;
+    nav a {
+      color: white;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-      user-select: text;
+      margin-left: 20px;
+      font-weight: bold;
     }
-    
-    a:hover {
-      background-color: #e6c200;
-      color: #002966;
-      transform: scale(1.05);
+    section {
+      padding: 100px 30px 60px;
     }
-    
-    /* Responsive (mobil uyumlu) */
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-      a {
-        padding: 10px 20px;
-        font-size: 1rem;
-      }
+    .hero {
+      text-align: center;
+      padding-top: 150px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      color: #003d7a;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .team, .catalog, .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .team-member, .product, .catalog-item {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .team-member h3, .product h4, .catalog-item h4 {
+      color: #0055aa;
+      margin-bottom: 8px;
+    }
+    .product img, .catalog-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 12px 24px;
+      background: #0055aa;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    footer {
+      background: #003d7a;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      margin-top: 60px;
+    }
+    iframe {
+      width: 100%;
+      height: 315px;
+      margin-top: 30px;
+      border-radius: 12px;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <h1>Benim Modern Web Sitem</h1>
-  <p>Hoş geldin! Bu sayfa canlı mavi arka plan ve şık tasarımla hazırlandı.</p>
-  <p>Daha fazla içerik, müzik ve görseller yakında eklenecek. Takipte kal!</p>
-  <a href="https://github.com/brs6211118/BEN-M-FAVOR-LER-M" target="_blank" rel="noopener noreferrer">GitHub Repo'ya Git</a>
+  <header>
+    <div><strong>Ali Barış Vinç</strong></div>
+    <nav>
+      <a href="#hero">Anasayfa</a>
+      <a href="#products">Ürünler</a>
+      <a href="#catalog">Katalog</a>
+      <a href="#team">Ekip</a>
+      <a href="#video">Video</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <h1>Kamyon Üstü Vinç İmalatında Güven</h1>
+    <p>Ali Barış Vinç, yüksek kaliteli ve dayanıklı kamyon üstü vinçler üreterek sektörün lideri olmayı hedefler.</p>
+  </section>
+
+  <section id="products">
+    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Ürünlerimiz</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1612023029976-b487aa6e7d10?auto=format&fit=crop&w=600&q=80" alt="Vinç A" />
+        <h4>Model A</h4>
+        <p>5 ton kaldırma kapasitesi, 12m uzanma. Hafif ve verimli kullanım.</p>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1597272613280-e0dbdd0c5202?auto=format&fit=crop&w=600&q=80" alt="Vinç B" />
+        <h4>Model B</h4>
+        <p>10 ton kaldırma kapasitesi, 18m uzanma. Endüstriyel projelere uygun.</p>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80" alt="Vinç C" />
+        <h4>Model C</h4>
+        <p>20 ton kaldırma kapasitesi, 25m erişim. Ağır sanayiye özel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Kaldırma Kapasitesi & Teknik Katalog</h2>
+    <div class="catalog">
+      <div class="catalog-item">
+        <img src="https://images.unsplash.com/photo-1617957741602-54f3b3dc80aa?auto=format&fit=crop&w=800&q=80" alt="Model A diyagramı">
+        <h4>Model A Teknik Detay</h4>
+        <p>5 ton kaldırma / Maks. 12 metre. Kullanım alanı: Şantiye içi, dar alanlar.</p>
+      </div>
+      <div class="catalog-item">
+        <img src="https://images.unsplash.com/photo-1615412882436-7275a6e032c0?auto=format&fit=crop&w=800&q=80" alt="Model B diyagramı">
+        <h4>Model B Teknik Detay</h4>
+        <p>10 ton kaldırma / Maks. 18 metre. Kullanım alanı: Lojistik ve taşımacılık.</p>
+      </div>
+      <div class="catalog-item">
+        <img src="https://images.unsplash.com/photo-1628179056595-593bd8226e62?auto=format&fit=crop&w=800&q=80" alt="Model C diyagramı">
+        <h4>Model C Teknik Detay</h4>
+        <p>20 ton kaldırma / Maks. 25 metre. Ağır sanayi ve büyük ölçekli projeler.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Ekibimiz</h2>
+    <div class="team">
+      <div class="team-member">
+        <h3>Ali</h3>
+        <p>CEO - Genel Müdür</p>
+      </div>
+      <div class="team-member">
+        <h3>Barış</h3>
+        <p>CTO - Teknik Müdür</p>
+      </div>
+      <div class="team-member">
+        <h3>Eşref</h3>
+        <p>Yazılım Geliştirici</p>
+      </div>
+      <div class="team-member">
+        <h3>Mevlüt</h3>
+        <p>CNC Operatörü</p>
+      </div>
+      <div class="team-member">
+        <h3>Esat</h3>
+        <p>Yatırımcı</p>
+      </div>
+      <div class="team-member">
+        <h3>Fehmi</h3>
+        <p>Güvenlik & İstihbarat</p>
+      </div>
+      <div class="team-member">
+        <h3>Eyyüp</h3>
+        <p>Müzisyen</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">Tanıtım Videomuz</h2>
+    <iframe src="https://www.youtube.com/embed/x6tDgf1xuXg" title="Firma Tanıtım Videosu" allowfullscreen></iframe>
+  </section>
+
+  <section id="iletisim">
+    <h2 style="text-align:center; color:#003d7a; margin-bottom:30px;">İletişim</h2>
+    <form>
+      <input type="text" placeholder="Ad Soyad" required />
+      <input type="email" placeholder="E-posta Adresi" required />
+      <textarea rows="5" placeholder="Mesajınız" required></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Ali Barış Vinç | Tüm Hakları Saklıdır.</p>
+  </footer>
 </body>
 </html>
