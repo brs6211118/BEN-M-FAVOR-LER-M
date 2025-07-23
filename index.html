@@ -420,3 +420,95 @@
   ];
 
   // DOM elemanları
+  const productsGrid = document.getElementById('products-grid');
+  const teamGrid = document.getElementById('team-grid');
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalSpecs = document.getElementById('modal-specs');
+  const modalClose = document.getElementById('modal-close');
+
+  // Ürünleri göster
+  function renderProducts() {
+    products.forEach(prod => {
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <h3>${prod.name}</h3>
+        <p>${prod.desc}</p>
+        <button aria-label="${prod.name} detaylarını göster">Detayları Göster</button>
+      `;
+      const btn = card.querySelector('button');
+      btn.addEventListener('click', () => openModal(prod));
+      productsGrid.appendChild(card);
+    });
+  }
+
+  // Modal aç
+  function openModal(product) {
+    modalTitle.textContent = product.name;
+    modalDesc.textContent = product.desc;
+    modalSpecs.innerHTML = '';
+    product.specs.forEach(spec => {
+      const li = document.createElement('li');
+      li.textContent = spec;
+      modalSpecs.appendChild(li);
+    });
+    modalOverlay.classList.add('active');
+  }
+
+  // Modal kapat
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if(e.target === modalOverlay) closeModal();
+  });
+
+  // Ekip göster
+  function renderTeam() {
+    team.forEach(member => {
+      const card = document.createElement('div');
+      card.className = 'team-member';
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <img src="${member.photo}" alt="${member.name} fotoğrafı" class="team-photo" />
+        <h3>${member.name}</h3>
+        <div class="position">${member.position}</div>
+        <div class="bio">${member.bio}</div>
+      `;
+      card.addEventListener('click', () => {
+        card.classList.toggle('active');
+      });
+      card.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('active');
+        }
+      });
+      teamGrid.appendChild(card);
+    });
+  }
+
+  // Form validasyon ve gönderme
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      alert('Lütfen formu doğru ve eksiksiz doldurun.');
+      return;
+    }
+    alert('Mesajınız alındı, teşekkürler!');
+    form.reset();
+  });
+
+  // Başlat
+  renderProducts();
+  renderTeam();
+</script>
+
+</body>
+</html>
