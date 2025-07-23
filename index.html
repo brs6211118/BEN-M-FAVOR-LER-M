@@ -221,4 +221,102 @@
     <div class="product">
       <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80" alt="Model C Sarı Vinç" style="filter: hue-rotate(45deg) saturate(3);" />
       <h4>Model C</h4>
-      <p>20 ton kaldırma kapasitesi, 25m erişim. Ağır sanayiye özel
+      <p>20 ton kaldırma kapasitesi, 25m erişim. Ağır sanayiye özel.</p>
+    </div>
+  </div>
+</section>
+
+<section id="catalog">
+  <h2 style="text-align:center; color:#003974; margin-bottom:30px;">Katalog</h2>
+  <div class="catalog">
+    <div class="catalog-item">
+      <img src="https://images.unsplash.com/photo-1563294914-9c6520c87884?auto=format&fit=crop&w=600&q=80" alt="Katalog 1" style="filter: hue-rotate(45deg) saturate(3);" />
+      <h4>Katalog 2024</h4>
+      <p>Yeni nesil vinç modellerimizi keşfedin. Dayanıklılık ve teknoloji bir arada.</p>
+    </div>
+    <div class="catalog-item">
+      <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f5d8?auto=format&fit=crop&w=600&q=80" alt="Katalog 2" style="filter: hue-rotate(45deg) saturate(3);" />
+      <h4>Katalog 2023</h4>
+      <p>Geçmiş yılların en çok tercih edilen vinç modelleri ve detayları.</p>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <h2 style="text-align:center; color:#003974; margin-bottom:30px;">Ekibimiz</h2>
+  <div class="team">
+    <div class="team-member">
+      <h3>Ali - CEO</h3>
+      <p>Şirketin vizyoner lideri, iş stratejileri ve büyümeden sorumlu.</p>
+    </div>
+    <div class="team-member">
+      <h3>Barış - CTO</h3>
+      <p>Teknoloji ve ürün geliştirmede uzman, teknik altyapıdan sorumlu.</p>
+    </div>
+    <div class="team-member">
+      <h3>Eşref - Yazılımcı</h3>
+      <p>Web ve yazılım çözümlerini geliştirir, dijital varlıkları yönetir.</p>
+    </div>
+    <div class="team-member">
+      <h3>Mevlüt - CNC Operatörü</h3>
+      <p>Üretim sürecinde hassas kesim ve montaj işlemlerini yürütür.</p>
+    </div>
+    <div class="team-member">
+      <h3>Esat - Yatırımcı</h3>
+      <p>Şirketin finansal destekçisi, büyüme yatırımlarını yönetir.</p>
+    </div>
+    <div class="team-member">
+      <h3>Fehmi - Güvenlik ve İstihbarat Sorumlusu</h3>
+      <p>Şirket içi güvenlik ve veri koruma stratejilerini geliştirir.</p>
+    </div>
+    <div class="team-member">
+      <h3>Eyyüp - Müzisyen</h3>
+      <p>Kurumsal etkinliklerde müzik desteği sağlar.</p>
+    </div>
+  </div>
+</section>
+
+<section id="video">
+  <h2 style="text-align:center; color:#003974; margin-bottom:30px;">Tanıtım Videomuz</h2>
+  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Tanıtım Videosu" allowfullscreen></iframe>
+</section>
+
+<section id="iletisim">
+  <h2 style="text-align:center; color:#003974; margin-bottom:30px;">İletişim</h2>
+  <form id="contactForm" action="mailto:ornek@kurtlersofrasi.com" method="POST" enctype="text/plain" onsubmit="return validateForm()">
+    <label for="isim">İsim:</label>
+    <input type="text" id="isim" name="isim" required placeholder="Adınız Soyadınız" />
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required placeholder="ornek@mail.com" />
+    <label for="mesaj">Mesajınız:</label>
+    <textarea id="mesaj" name="mesaj" rows="5" required placeholder="Mesajınızı buraya yazınız"></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Kürtler Sofrası Vinç - Tüm hakları saklıdır.
+</footer>
+
+<script>
+  function validateForm() {
+    const isim = document.getElementById('isim').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mesaj = document.getElementById('mesaj').value.trim();
+
+    if (!isim || !email || !mesaj) {
+      alert("Lütfen tüm alanları doldurun.");
+      return false;
+    }
+    // Basit email regex kontrolü
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Lütfen geçerli bir email adresi girin.");
+      return false;
+    }
+    return true;
+  }
+</script>
+
+</body>
+</html>
