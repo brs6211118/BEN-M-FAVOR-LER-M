@@ -4,285 +4,333 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kürtler Sofrası Vinç</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    /* Genel Reset ve Temel Stil */
-    * {
-      box-sizing: border-box;
-    }
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
-      line-height: 1.6;
-      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f5f5f5;
+      color: #333;
     }
-    a {
-      color: #ffc107;
-      text-decoration: none;
-    }
-    a:hover,
-    a:focus {
-      text-decoration: underline;
-    }
-
-    /* Header */
     header {
-      background-color: #111;
+      background: #111;
       color: #ffc107;
       text-align: center;
-      padding: 1rem 1rem 0.8rem 1rem;
+      padding: 1rem;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 4px rgb(0 0 0 / 0.4);
     }
-    header h1 {
-      margin: 0;
-      font-weight: 600;
-      font-size: 1.8rem;
-    }
-    header p {
-      margin: 0.3rem 0 1rem 0;
-      font-weight: 400;
-      font-size: 1rem;
-    }
-
-    /* Nav */
     nav {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      padding-bottom: 0.6rem;
-      background-color: #222;
+      background: #222;
+      padding: 0.5rem 0;
     }
     nav a {
-      padding: 0.5rem 0.8rem;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
+      color: #ffc107;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
     }
-    nav a.active,
-    nav a:hover,
-    nav a:focus {
-      background-color: #ffc107;
-      color: #111;
-      outline: none;
+    nav a:hover {
+      text-decoration: underline;
     }
-
-    /* Hero Bölümü */
-    .hero {
-      background: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.7)), url('https://images.unsplash.com/photo-1572053433719-c5f5e3e3e1ee?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-      color: white;
-      padding: 120px 1rem 100px 1rem;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      font-size: 1.4rem;
-      font-weight: 300;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Bölümler */
     section {
-      max-width: 1100px;
-      margin: 3rem auto;
+      max-width: 1000px;
+      margin: 2rem auto;
       padding: 0 1rem;
     }
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #111;
-      border-bottom: 3px solid #ffc107;
-      display: inline-block;
-      padding-bottom: 0.2rem;
+    h2 {
+      border-bottom: 2px solid #ffc107;
+      padding-bottom: 0.3rem;
     }
-    section p {
-      max-width: 800px;
-    }
-
-    /* Ürün Filtreleme Butonları */
-    .filter-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-bottom: 2rem;
-    }
-    .filter-btn {
-      background-color: #ffc107;
-      border: none;
-      padding: 0.6rem 1.3rem;
-      font-weight: 600;
-      border-radius: 30px;
-      cursor: pointer;
-      color: #111;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    .filter-btn:hover,
-    .filter-btn:focus {
-      background-color: #e0a800;
-      outline: none;
-    }
-    .filter-btn.active {
-      background-color: #111;
-      color: #ffc107;
-    }
-
-    /* Ürünler Grid */
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1rem;
     }
     .product {
       background: white;
-      padding: 1.8rem 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .product:hover,
-    .product:focus-within {
-      transform: translateY(-7px);
-      box-shadow: 0 8px 18px rgb(0 0 0 / 0.15);
-      outline: none;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 0 7px rgba(0,0,0,0.1);
     }
     .product h3 {
-      color: #ffc107;
-      margin-top: 0;
-      margin-bottom: 0.7rem;
-      font-weight: 600;
+      color: #111;
+      margin: 0 0 0.5rem 0;
     }
     .product p {
-      flex-grow: 1;
-      margin-bottom: 1.2rem;
-      color: #444;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
-    .details-btn {
-      background-color: #111;
-      color: #ffc107;
+    button {
+      background: #ffc107;
       border: none;
-      padding: 0.6rem 1rem;
-      font-weight: 600;
+      padding: 0.5rem 1rem;
       cursor: pointer;
-      border-radius: 6px;
-      transition: background-color 0.3s ease;
-      align-self: start;
+      font-weight: bold;
+      border-radius: 4px;
+      color: #111;
     }
-    .details-btn:hover,
-    .details-btn:focus {
-      background-color: #333;
-      outline: none;
+    button:hover {
+      background: #e6b800;
     }
-
     /* Modal */
-    #productModal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0,0,0,0.6);
+    #modal {
       display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
       align-items: center;
       justify-content: center;
-      padding: 1rem;
-      z-index: 1500;
+      z-index: 2000;
     }
-    #productModal.active {
+    #modal.active {
       display: flex;
     }
-    .modal-content {
+    #modal-content {
       background: white;
-      border-radius: 12px;
-      max-width: 480px;
-      width: 100%;
-      padding: 1.8rem 2rem 2rem 2rem;
+      padding: 1.5rem;
+      border-radius: 5px;
+      max-width: 400px;
+      width: 90%;
       position: relative;
-      box-shadow: 0 6px 15px rgb(0 0 0 / 0.25);
-      max-height: 90vh;
-      overflow-y: auto;
     }
-    .modal-content h3 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: #111;
-    }
-    .modal-content ul {
-      padding-left: 1.2rem;
-      margin-bottom: 1.6rem;
-      color: #444;
-    }
-    .modal-content ul li {
-      margin-bottom: 0.5rem;
-    }
-    .close-btn {
+    #modal-close {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #111;
+      top: 8px; right: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
       border: none;
-      color: #ffc107;
-      font-size: 1.3rem;
-      font-weight: 700;
-      cursor: pointer;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      line-height: 1;
-      text-align: center;
-      transition: background-color 0.3s ease;
+      background: none;
     }
-    .close-btn:hover,
-    .close-btn:focus {
-      background-color: #333;
-      outline: none;
-    }
-
-    /* Ekip Bölümü */
-    .team-grid {
+    /* Team */
+    .team {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
-      gap: 1.8rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 1rem;
     }
-    .team-member {
+    .member {
       background: white;
-      border-radius: 12px;
-      padding: 1.5rem 1.3rem;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.07);
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 0 7px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      outline: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      position: relative;
-      user-select: none;
     }
-    .team-member:hover,
-    .team-member:focus,
-    .team-member.active {
-      box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
-      transform: translateY(-6px);
-      outline: none;
-    }
-    .team-member h4 {
-      margin: 0 0 0.2rem 0;
+    .member h4 {
+      margin: 0 0 0.3rem 0;
       color: #111;
-      font-weight: 700;
     }
-    .team-member span.position {
+    .member .position {
       font-size: 0.9rem;
       color: #ffc107;
+      margin-bottom: 0.7rem;
+    }
+    .member .details {
+      font-size: 0.85rem;
+      display: none;
+      color: #555;
+    }
+    .member.active .details {
+      display: block;
+    }
+    /* Contact */
+    form {
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    button.submit-btn {
+      margin-top: 1rem;
+      background: #ffc107;
+      border: none;
+      padding: 0.7rem 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: #111;
+      border-radius: 4px;
+    }
+    button.submit-btn:hover {
+      background: #e6b800;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Kürtler Sofrası Vinç</h1>
+  <nav>
+    <a href="#products">Ürünler</a>
+    <a href="#team">Ekip</a>
+    <a href="#contact">İletişim</a>
+  </nav>
+</header>
+
+<section id="products">
+  <h2>Vinç Ürünleri</h2>
+  <div class="products">
+    <div class="product" data-tonaj="10-20">
+      <h3>Vinç Model A</h3>
+      <p>10-20 Ton kapasiteli, güvenilir ve sağlam vinç.</p>
+      <button class="details-btn">Detaylar</button>
+      <div class="details-content" style="display:none;">
+        <ul>
+          <li>Kapasite: 10-20 Ton</li>
+          <li>Motor Gücü: 250 HP</li>
+          <li>Uzunluk: 12 m</li>
+        </ul>
+      </div>
+    </div>
+    <div class="product" data-tonaj="21-40">
+      <h3>Vinç Model B</h3>
+      <p>21-40 Ton kapasiteli yüksek performanslı vinç.</p>
+      <button class="details-btn">Detaylar</button>
+      <div class="details-content" style="display:none;">
+        <ul>
+          <li>Kapasite: 21-40 Ton</li>
+          <li>Motor Gücü: 400 HP</li>
+          <li>Uzunluk: 15 m</li>
+        </ul>
+      </div>
+    </div>
+    <div class="product" data-tonaj="41-60">
+      <h3>Vinç Model C</h3>
+      <p>41-60 Ton kapasiteli ağır yük vinci.</p>
+      <button class="details-btn">Detaylar</button>
+      <div class="details-content" style="display:none;">
+        <ul>
+          <li>Kapasite: 41-60 Ton</li>
+          <li>Motor Gücü: 600 HP</li>
+          <li>Uzunluk: 18 m</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Ekibimiz</h2>
+  <div class="team">
+    <div class="member" tabindex="0">
+      <h4>Ahmet Yılmaz</h4>
+      <div class="position">Satış Müdürü</div>
+      <div class="details">
+        10 yıldan fazla vinç satış deneyimi. Müşteri odaklı ve çözüm odaklı.
+      </div>
+    </div>
+    <div class="member" tabindex="0">
+      <h4>Mehmet Demir</h4>
+      <div class="position">Teknik Servis Sorumlusu</div>
+      <div class="details">
+        Vinçlerin düzenli bakımı ve arıza tespiti konusunda uzman.
+      </div>
+    </div>
+    <div class="member" tabindex="0">
+      <h4>Ayşe Kara</h4>
+      <div class="position">Proje Koordinatörü</div>
+      <div class="details">
+        Proje yönetimi ve lojistik koordinasyonu sağlar.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>İletişim</h2>
+  <form id="contactForm" novalidate>
+    <label for="name">İsim:</label>
+    <input type="text" id="name" name="name" required minlength="2" />
+    <label for="email">E-posta:</label>
+    <input type="email" id="email" name="email" required />
+    <label for="message">Mesajınız:</label>
+    <textarea id="message" name="message" rows="5" required minlength="10"></textarea>
+    <button class="submit-btn" type="submit">Gönder</button>
+  </form>
+</section>
+
+<!-- Modal -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-content">
+    <button id="modal-close" aria-label="Kapat">&times;</button>
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+  // Detay butonları aç/kapa modal
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const modalClose = document.getElementById('modal-close');
+
+  document.querySelectorAll('.details-btn').forEach(button => {
+    button.addEventListener('click', e => {
+      const product = e.target.closest('.product');
+      modalTitle.textContent = product.querySelector('h3').textContent;
+      modalBody.innerHTML = product.querySelector('.details-content').innerHTML;
+      modal.classList.add('active');
+      modalClose.focus();
+    });
+  });
+
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.classList.remove('active');
+  });
+  // Klavye ile kapama (Esc)
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+    }
+  });
+
+  // Ekip üyeleri detay toggle
+  document.querySelectorAll('.member').forEach(member => {
+    member.addEventListener('click', () => {
+      member.classList.toggle('active');
+    });
+    member.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        member.classList.toggle('active');
+      }
+    });
+  });
+
+  // Form gönderim simülasyonu
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) {
+      alert('Lütfen formu doğru şekilde doldurun.');
+      return;
+    }
+    alert('Mesajınız gönderildi. Teşekkürler!');
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
