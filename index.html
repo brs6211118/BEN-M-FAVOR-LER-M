@@ -5,35 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kürtler Sofrası Vinç</title>
   <style>
-    /* Temel Reset */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #d0e7ff; /* Açık mavi arka plan */
+      background: #c7def8; /* Açık mavi arka plan */
       color: #222;
       scroll-behavior: smooth;
       line-height: 1.6;
     }
     header {
-      background: #004080; /* Koyu mavi ton */
+      background: #005bbb; /* Daha koyu mavi */
       color: white;
       padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
-    header strong {
+    header div.logo {
+      font-weight: 700;
       font-size: 1.5rem;
       letter-spacing: 1px;
+      user-select: none;
     }
     nav a {
       color: white;
@@ -44,186 +43,182 @@
       transition: color 0.3s;
     }
     nav a:hover {
-      color: #ffc107; /* Sarı vurgu */
+      color: #ffd700; /* Sarı vurgu */
     }
     section {
-      padding: 100px 30px 60px;
+      padding: 110px 30px 60px; /* Header sabit olduğu için üstten boşluk */
       max-width: 1200px;
       margin: 0 auto;
     }
     .hero {
       text-align: center;
-      padding-top: 140px;
-      margin-bottom: 50px;
+      padding-bottom: 40px;
     }
     .hero h1 {
       font-size: 3.2rem;
-      color: #003366;
+      color: #003974; /* Koyu mavi */
       margin-bottom: 15px;
     }
     .hero p {
       font-size: 1.3rem;
       max-width: 700px;
       margin: 0 auto;
-      color: #004080;
+      color: #004a99;
     }
-    /* Ürünler ve katalog grid */
     .products, .catalog, .team {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
       gap: 30px;
+      margin-top: 30px;
     }
-    /* Kart stili */
     .product, .catalog-item, .team-member {
       background: white;
       padding: 20px;
-      border-radius: 12px;
+      border-radius: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       text-align: center;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease;
     }
     .product:hover, .catalog-item:hover, .team-member:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     .product h4, .catalog-item h4, .team-member h3 {
-      color: #ffc107; /* Sarı renk başlıklar */
+      color: #e6b800; /* Sarı başlıklar */
       margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
     .product p, .catalog-item p, .team-member p {
-      color: #444;
+      color: #333;
       font-size: 1rem;
+      min-height: 48px;
     }
-    /* Vinç görselleri sarı tonlarda */
     .product img, .catalog-item img {
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      filter: brightness(1.1) saturate(1.4) hue-rotate(-30deg);
-      /* Bu filtreler görselin sarı tonunu biraz artırır */
+      border-radius: 12px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 3px #e6b800);
     }
-    /* Ekip üyesi yazı */
+    .team-member {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
     .team-member h3 {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       margin-bottom: 6px;
     }
-    /* Video bölümü */
-    #video iframe {
-      width: 100%;
-      max-width: 900px;
-      height: 500px;
-      border-radius: 12px;
-      border: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      display: block;
-      margin: 30px auto 0;
+    .team-member p {
+      font-style: italic;
+      color: #555;
     }
-    /* İletişim formu */
     form {
       max-width: 600px;
-      margin: 0 auto 60px;
+      margin: 50px auto 30px;
       background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 35px 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      font-size: 1rem;
     }
     input, textarea {
       width: 100%;
-      padding: 14px 12px;
-      margin: 12px 0;
-      border: 1.5px solid #ccc;
+      padding: 14px;
+      margin-top: 15px;
+      margin-bottom: 20px;
       border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
       font-size: 1rem;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s ease;
     }
     input:focus, textarea:focus {
-      border-color: #ffc107;
       outline: none;
+      border-color: #e6b800;
+      box-shadow: 0 0 8px #e6b800aa;
     }
     button {
-      padding: 14px 28px;
-      background: #ffc107; /* Sarı buton */
-      color: #004080;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      margin-top: 10px;
       display: block;
       width: 100%;
+      background-color: #e6b800;
+      color: #003974;
+      padding: 14px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     button:hover {
-      background: #e6b007;
+      background-color: #c4a300;
     }
     footer {
-      background: #003366;
+      background: #003974;
       color: white;
       text-align: center;
-      padding: 25px 10px;
+      padding: 35px 15px;
+      margin-top: 60px;
+      user-select: none;
       font-size: 1rem;
-      letter-spacing: 0.05em;
-      margin-top: 40px;
-      box-shadow: inset 0 3px 6px rgba(0,0,0,0.2);
     }
-    /* Responsive iyileştirmeler */
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        padding: 15px 20px;
-      }
-      nav a {
-        margin-left: 0;
-        margin-right: 15px;
-        font-size: 0.95rem;
-      }
+    iframe {
+      width: 100%;
+      height: 360px;
+      border-radius: 15px;
+      border: none;
+      margin-top: 35px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    @media(max-width: 650px) {
       .hero h1 {
         font-size: 2.2rem;
       }
-      .hero p {
-        font-size: 1rem;
+      nav a {
+        margin-left: 12px;
+        font-size: 0.9rem;
       }
-      #video iframe {
-        height: 280px;
+      form {
+        padding: 25px 20px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div><strong>Kürtler Sofrası Vinç</strong></div>
-    <nav>
-      <a href="#hero">Anasayfa</a>
-      <a href="#products">Ürünler</a>
-      <a href="#catalog">Katalog</a>
-      <a href="#team">Ekip</a>
-      <a href="#video">Video</a>
-      <a href="#iletisim">İletişim</a>
-    </nav>
-  </header>
 
-  <section id="hero" class="hero">
-    <h1>Kamyon Üstü Vinç İmalatında Güven</h1>
-    <p>Kürtler Sofrası Vinç, yüksek kaliteli ve dayanıklı kamyon üstü vinçler üreterek sektörün lideri olmayı hedefler.</p>
-  </section>
+<header>
+  <div class="logo">Kürtler Sofrası Vinç</div>
+  <nav>
+    <a href="#hero">Anasayfa</a>
+    <a href="#products">Ürünler</a>
+    <a href="#catalog">Katalog</a>
+    <a href="#team">Ekibimiz</a>
+    <a href="#video">Video</a>
+    <a href="#iletisim">İletişim</a>
+  </nav>
+</header>
 
-  <section id="products">
-    <h2 style="text-align:center; color:#004080; margin-bottom:30px;">Ürünlerimiz</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1612023029976-b487aa6e7d10?auto=format&fit=crop&w=600&q=80" alt="Model A Vinç" />
-        <h4>Model A</h4>
-        <p>5 ton kaldırma kapasitesi, 12m uzanma. Hafif ve verimli kullanım.</p>
-      </div>
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1597272613280-e0dbdd0c5202?auto=format&fit=crop&w=600&q=80" alt="Model B Vinç" />
-        <h4>Model B</h4>
-        <p>10 ton kaldırma kapasitesi, 18m uzanma. Endüstriyel projelere uygun.</p>
-      </div>
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80" alt="Model C Vinç" />
-        <h4>Model C</h4>
-        <p>20 ton kaldırma kapasitesi, 25m erişim. Ağ
+<section id="hero" class="hero">
+  <h1>Kamyon Üstü Vinç İmalatında Liderlik</h1>
+  <p>Yüksek kaliteli sarı vinçlerimizle güvenilir çözümler sunuyoruz. Sektörde güvenin adresi Kürtler Sofrası Vinç.</p>
+</section>
+
+<section id="products">
+  <h2 style="text-align:center; color:#003974; margin-bottom:30px;">Ürünlerimiz</h2>
+  <div class="products">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1612023029976-b487aa6e7d10?auto=format&fit=crop&w=600&q=80" alt="Model A Sarı Vinç" style="filter: hue-rotate(45deg) saturate(3);" />
+      <h4>Model A</h4>
+      <p>5 ton kaldırma kapasitesi, 12m uzanma. Hafif ve verimli kullanım.</p>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1597272613280-e0dbdd0c5202?auto=format&fit=crop&w=600&q=80" alt="Model B Sarı Vinç" style="filter: hue-rotate(45deg) saturate(3);" />
+      <h4>Model B</h4>
+      <p>10 ton kaldırma kapasitesi, 18m uzanma. Endüstriyel projelere uygun.</p>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80" alt="Model C Sarı Vinç" style="filter: hue-rotate(45deg) saturate(3);" />
+      <h4>Model C</h4>
+      <p>20 ton kaldırma kapasitesi, 25m erişim. Ağır sanayiye özel
