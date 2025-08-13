@@ -16,7 +16,7 @@
   </title>
   <meta
     name="description"
-    content="Erhan Hub, 18+ yetişkin film platformu için KURUMSAL bir DEMO şablondur. Gerçek içerik barındırmaz. isFamilyFriendly:false"
+    content="Erhan Hub, 18+ yetişkin film platformu için kurumsal ve temiz bir DEMO şablondur. Gerçek içerik barındırmaz. isFamilyFriendly:false"
   >
   <meta
     name="rating"
@@ -46,13 +46,12 @@
   >
   <meta
     property="og:description"
-    content="18+ (DEMO) şablon: arama, kategori çipleri, ızgara, erişilebilir modal oynatıcı, sayfalama, tema/kontrast anahtarları, yaş ve çerez onayı."
+    content="18+ (DEMO) şablon: arama, kategori çipleri, grid, erişilebilir modal oynatıcı, sayfalama, tema/kontrast anahtarları, çerez ve yerel depolama onayı."
   >
   <meta
     property="og:site_name"
     content="Erhan Hub"
   >
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -69,7 +68,6 @@
     }
   }
   </script>
-
   <style>
     :root {
       --bg:           #0b1020;
@@ -568,33 +566,14 @@
       font-size: 14px;
     }
 
-    /* Overlay (age gate & cookie) */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(2,6,23,.78);
-      backdrop-filter: blur(6px);
-      display: grid;
-      place-items: center;
-      z-index: 60;
-    }
-
+    /* Cookie */
     .overlay-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      max-width: 640px;
+      max-width: 720px;
       padding: 18px;
       box-shadow: var(--shadow-2);
-    }
-
-    .overlay h2 {
-      margin: 0 0 8px;
-    }
-
-    .overlay p {
-      margin: 0 0 12px;
-      color: var(--muted);
     }
 
     .cookie {
@@ -603,11 +582,6 @@
       right: 12px;
       bottom: 12px;
       z-index: 40;
-    }
-
-    .cookie .overlay-card {
-      max-width: 720px;
-      margin-inline: auto;
     }
 
     .visually-hidden {
@@ -637,7 +611,6 @@
       header,
       .chips,
       .pagination,
-      #ageGate,
       #cookieBar,
       #player {
         display: none !important;
@@ -651,7 +624,6 @@
     }
   </style>
 </head>
-
 <body>
   <a
     class="skip"
@@ -992,55 +964,6 @@
     </div>
   </dialog>
 
-  <!-- Age Gate -->
-  <div
-    id="ageGate"
-    class="overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="ageTitle"
-    aria-describedby="ageDesc"
-    hidden
-  >
-    <div class="overlay-card">
-      <h2 id="ageTitle">
-        18+ Yaş Doğrulama
-      </h2>
-
-      <p id="ageDesc">
-        Bu platform
-        <strong>18+</strong>
-        yetişkin içerik için DEMO şablonudur ve gerçek içerik barındırmaz.
-        Devam ederek 18 yaşından büyük olduğunuzu onaylarsınız.
-      </p>
-
-      <div class="row" style="justify-content:flex-end">
-        <a
-          class="btn"
-          href="about:blank"
-          rel="nofollow"
-          aria-label="Ayrıl"
-        >
-          Ayrıl
-        </a>
-
-        <button
-          id="enterBtn"
-          class="btn primary"
-        >
-          Giriş (18+)
-        </button>
-      </div>
-
-      <p
-        class="small"
-        style="margin-top:8px;color:var(--muted)"
-      >
-        Onay tercihiniz tarayıcınızda yerel olarak saklanır.
-      </p>
-    </div>
-  </div>
-
   <!-- Cookie -->
   <div
     id="cookieBar"
@@ -1078,7 +1001,9 @@
 
   <script>
     (() => {
-      /* ---------- Shortcuts & LS helpers ---------- */
+      /* ----------------------------------------------------------------
+         Yardımcılar
+      ------------------------------------------------------------------*/
       const $  = (s, r = document) => r.querySelector(s);
       const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
@@ -1097,11 +1022,12 @@
         }
       };
 
-      /* ---------- Keys & Initials ---------- */
+      /* ----------------------------------------------------------------
+         Sabitler ve Anahtarlar
+      ------------------------------------------------------------------*/
       const KEY_THEME   = "eh_theme";
       const KEY_CON     = "eh_contrast";
       const KEY_MOTION  = "eh_motion";
-      const KEY_AGE     = "eh_age_ok";
       const KEY_COOKIE  = "eh_cookie";
       const KEY_QUERY   = "eh_query";
       const KEY_CAT     = "eh_cat";
@@ -1112,7 +1038,9 @@
       const YEAR = new Date().getFullYear();
       $("#yil").textContent = YEAR;
 
-      /* ---------- Theme / Contrast / Motion ---------- */
+      /* ----------------------------------------------------------------
+         Tema / Kontrast / Hareket
+      ------------------------------------------------------------------*/
       const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
       const savedTheme  = LS.get(KEY_THEME)  || (prefersDark ? "dark" : "light");
       const savedCon    = LS.get(KEY_CON)    || "normal";
@@ -1162,6 +1090,8 @@
         const next = cur === "dark" ? "light" : "dark";
         setTheme(next);
         announce("Tema: " + (next === "dark" ? "Koyu" : "Açık"));
+        // Görsel paletini de güncellemek için yeniden render
+        render(true);
       });
 
       contrastBtn.addEventListener("click", () => {
@@ -1178,30 +1108,104 @@
         announce("Hareket: " + (next === "reduce" ? "Azaltıldı" : "Otomatik"));
       });
 
-      /* ---------- Placeholder poster (data URL) ---------- */
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      const colorA = currentTheme === "dark" ? "22d3ee" : "0ea5e9";
-      const colorB = currentTheme === "dark" ? "a78bfa" : "7c3aed";
+      /* ----------------------------------------------------------------
+         Kategoriye uyumlu SVG Poster (Data URL)
+         - Renk şeması kategoriye göre değişir
+         - Başlık ve süre işlenir
+      ------------------------------------------------------------------*/
+      const CAT_COLORS = {
+        "Romantik": ["ff6b6b", "f06595"],
+        "Cinematic": ["22d3ee", "3b82f6"],
+        "HD": ["a78bfa", "7c3aed"],
+        "Trend": ["34d399", "22c55e"],
+        "Yeni": ["fbbf24", "f59e0b"],
+        "Tümü": ["94a3b8", "64748b"]
+      };
 
-      const svgPoster = encodeURIComponent(
-        `<svg xmlns='http://www.w3.org/2000/svg' width='640' height='360'>
+      function getCatColors(cat) {
+        const theme = document.documentElement.getAttribute("data-theme");
+        const base = CAT_COLORS[cat] || CAT_COLORS["Tümü"];
+        // Koyu temada daha doygun bir ikinci renk
+        if (theme === "dark") return base;
+        // Açık temada tonları biraz yumuşat
+        return base.map(hex => lighten(hex, 8));
+      }
+
+      function lighten(hex, amt) {
+        const n = parseInt(hex, 16);
+        let r = (n >> 16) & 255;
+        let g = (n >> 8) & 255;
+        let b = n & 255;
+        r = Math.min(255, r + amt);
+        g = Math.min(255, g + amt);
+        b = Math.min(255, b + amt);
+        return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+      }
+
+      function sanitizeText(t, max = 28) {
+        const s = String(t || "").replace(/\s+/g, " ").trim();
+        return s.length > max ? s.slice(0, max - 1) + "…" : s;
+      }
+
+      function buildPosterDataUrl({ title, category, duration }) {
+        const [c1, c2] = getCatColors(category);
+        const safeTitle = sanitizeText(title, 30);
+        const safeCat   = sanitizeText(category, 10);
+        const theme     = document.documentElement.getAttribute("data-theme");
+        const fg = theme === "dark" ? "ffffff" : "0f172a";
+        const fgDim = theme === "dark" ? "e5e7eb" : "334155";
+
+        const svg = `
+        <svg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'>
           <defs>
-            <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
-              <stop stop-color='%23${colorA}'/>
-              <stop offset='1' stop-color='%23${colorB}'/>
+            <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+              <stop offset='0' stop-color='#${c1}' />
+              <stop offset='1' stop-color='#${c2}' />
             </linearGradient>
+            <linearGradient id='glow' x1='0' y1='0' x2='1' y2='1'>
+              <stop offset='0' stop-color='#ffffff' stop-opacity='0.18' />
+              <stop offset='1' stop-color='#ffffff' stop-opacity='0' />
+            </linearGradient>
+            <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+            </filter>
           </defs>
-          <rect width='100%' height='100%' fill='url(#g)'/>
-          <g fill='white' opacity='0.9'>
-            <circle cx='320' cy='180' r='54'/>
-            <polygon points='310,155 350,180 310,205'/>
-          </g>
-          <text x='50%' y='92%' font-family='Arial,Helvetica,sans-serif' font-size='20' fill='white' text-anchor='middle' opacity='.9'>DEMO • 16:9</text>
-        </svg>`
-      );
-      const posterURL = `data:image/svg+xml;charset=utf-8,${svgPoster}`;
 
-      /* ---------- Data seed (placeholder only) ---------- */
+          <rect width='640' height='360' fill='url(#bg)'/>
+
+          <g opacity='0.12'>
+            <circle cx='90' cy='60' r='48' fill='url(#glow)'/>
+            <circle cx='560' cy='280' r='60' fill='url(#glow)'/>
+            <rect x='460' y='30' width='120' height='20' rx='10' fill='#ffffff'/>
+            <rect x='40' y='290' width='180' height='28' rx='14' fill='#ffffff'/>
+          </g>
+
+          <g filter="url(#s)">
+            <circle cx='320' cy='168' r='54' fill='#${fg}' opacity='0.92'/>
+            <polygon points='306,144 352,168 306,192' fill='#${theme === "dark" ? c1 : c2}' />
+          </g>
+
+          <rect x='16' y='16' rx='10' ry='10' width='90' height='28' fill='#${fg}' opacity='0.15'/>
+          <text x='26' y='36' font-family='Arial,Helvetica,sans-serif' font-size='14' fill='#${fgDim}' opacity='0.95'>
+            ${safeCat}
+          </text>
+
+          <text x='320' y='320' font-family='Arial,Helvetica,sans-serif' font-size='22' fill='#${fg}' text-anchor='middle' opacity='0.98'>
+            ${safeTitle}
+          </text>
+
+          <rect x='540' y='16' rx='8' ry='8' width='84' height='28' fill='#${fg}' opacity='0.18'/>
+          <text x='582' y='35' font-family='Arial,Helvetica,sans-serif' font-size='14' fill='#${fg}' text-anchor='middle' opacity='0.98'>
+            ${duration}
+          </text>
+        </svg>`.trim();
+
+        return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      }
+
+      /* ----------------------------------------------------------------
+         Veri Seed (Yer tutucu)
+      ------------------------------------------------------------------*/
       const categories = [
         "Romantik",
         "Cinematic",
@@ -1257,7 +1261,9 @@
         });
       }
 
-      /* ---------- State ---------- */
+      /* ----------------------------------------------------------------
+         Durum
+      ------------------------------------------------------------------*/
       const defaultPer   = Number(LS.get(KEY_PER)  || 10);
       const defaultSort  = LS.get(KEY_SORT)        || "date_desc";
       const defaultCat   = LS.get(KEY_CAT)         || "Tümü";
@@ -1273,7 +1279,9 @@
         data:  seed.slice()
       };
 
-      /* ---------- Elements ---------- */
+      /* ----------------------------------------------------------------
+         Elemanlar
+      ------------------------------------------------------------------*/
       const grid       = $("#grid");
       const pageInfo   = $("#pageInfo");
       const prevBtn    = $("#prev");
@@ -1286,24 +1294,26 @@
       const sortSel    = $("#sortSel");
       const perSel     = $("#perSel");
 
-      /* ---------- Apply initial UI state ---------- */
       searchInp.value = state.q;
       sortSel.value   = state.sort;
       perSel.value    = String(state.per);
 
-      // Set category pressed
       $$(".chip").forEach((btn) => {
         btn.setAttribute("aria-pressed",
           btn.dataset.cat === state.cat ? "true" : "false"
         );
       });
 
-      /* ---------- Announcer ---------- */
+      /* ----------------------------------------------------------------
+         Duyuru alanı
+      ------------------------------------------------------------------*/
       function announce(msg) {
         liveStatus.textContent = msg;
       }
 
-      /* ---------- Filter + Sort + Paginate ---------- */
+      /* ----------------------------------------------------------------
+         Filtre / Sırala / Sayfala
+      ------------------------------------------------------------------*/
       function sortItems(items, mode) {
         const arr = items.slice();
         switch (mode) {
@@ -1354,8 +1364,10 @@
         };
       }
 
-      /* ---------- Render ---------- */
-      function render() {
+      /* ----------------------------------------------------------------
+         Render
+      ------------------------------------------------------------------*/
+      function render(forceRebuildPosters = false) {
         const filtered = filterItems(state.data, state.q, state.cat);
         const sorted   = sortItems(filtered, state.sort);
         const pg       = paginate(sorted, state.page, state.per);
@@ -1365,16 +1377,28 @@
         grid.innerHTML = "";
 
         pg.slice.forEach((v) => {
+          const poster = forceRebuildPosters ? null : buildPosterDataUrl({
+            title: v.title,
+            category: v.category,
+            duration: v.duration
+          });
+
           const card = document.createElement("article");
           card.className = "card";
           card.setAttribute("role", "listitem");
+
+          const posterUrl = poster || buildPosterDataUrl({
+            title: v.title,
+            category: v.category,
+            duration: v.duration
+          });
 
           card.innerHTML = `
             <div class="thumb-wrap">
               <img
                 class="thumb"
                 loading="lazy"
-                src="${posterURL}"
+                src="${posterUrl}"
                 alt="Poster: ${escapeHtml(v.title)}"
               >
               <span
@@ -1445,7 +1469,7 @@
         ].join(" • ");
         summary.textContent = sum;
 
-        // Persist UI (only minimal, regardless of cookie; these are zorunlu)
+        // Persist minimal UI tercihleri
         LS.set(KEY_QUERY, state.q);
         LS.set(KEY_CAT,   state.cat);
         LS.set(KEY_PAGE,  String(state.page));
@@ -1523,7 +1547,9 @@
           .replaceAll("'", "&#039;");
       }
 
-      /* ---------- Events ---------- */
+      /* ----------------------------------------------------------------
+         Etkinlikler
+      ------------------------------------------------------------------*/
       searchInp.addEventListener("input", (e) => {
         state.q = e.target.value;
         state.page = 1;
@@ -1585,7 +1611,9 @@
         openPlayer(item);
       });
 
-      /* ---------- Player ---------- */
+      /* ----------------------------------------------------------------
+         Oynatıcı
+      ------------------------------------------------------------------*/
       const player      = $("#player");
       const closePlayer = $("#closePlayer");
       const muteBtn     = $("#muteBtn");
@@ -1598,7 +1626,14 @@
 
       function openPlayer(item) {
         playerTitle.textContent = item.title;
-        videoEl.poster = posterURL;
+
+        // Poster, kartla uyumlu SVG olacak
+        videoEl.poster = buildPosterDataUrl({
+          title: item.title,
+          category: item.category,
+          duration: item.duration
+        });
+
         videoSrc.src   = tinyVideo;
         try { videoEl.load(); } catch {}
         player.showModal();
@@ -1633,7 +1668,9 @@
         announce(next ? "Ses kapalı" : "Ses açık");
       });
 
-      /* ---------- Add Demo Item ---------- */
+      /* ----------------------------------------------------------------
+         Demo İçerik Ekle
+      ------------------------------------------------------------------*/
       $("#addBtn").addEventListener("click", () => {
         const n   = state.data.length + 1;
         const cat = pick(categories);
@@ -1652,23 +1689,9 @@
         announce("Yeni içerik eklendi");
       });
 
-      /* ---------- Age Gate ---------- */
-      const ageGate  = $("#ageGate");
-      const enterBtn = $("#enterBtn");
-      const ageOk    = LS.get(KEY_AGE) === "1";
-
-      if (!ageOk) {
-        ageGate.hidden = false;
-        setTimeout(() => enterBtn.focus(), 0);
-      }
-
-      enterBtn.addEventListener("click", () => {
-        LS.set(KEY_AGE, "1");
-        ageGate.hidden = true;
-        announce("18+ onayı verildi");
-      });
-
-      /* ---------- Cookie Bar ---------- */
+      /* ----------------------------------------------------------------
+         Çerez Çubuğu
+      ------------------------------------------------------------------*/
       const cookieBar  = $("#cookieBar");
       const cookieVal  = LS.get(KEY_COOKIE);
 
@@ -1688,7 +1711,9 @@
         announce("Çerez bildirimi reddedildi");
       });
 
-      /* ---------- Keyboard Shortcuts ---------- */
+      /* ----------------------------------------------------------------
+         Kısayollar
+      ------------------------------------------------------------------*/
       document.addEventListener("keydown", (e) => {
         if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
 
@@ -1728,7 +1753,9 @@
         }
       });
 
-      /* ---------- Initial render ---------- */
+      /* ----------------------------------------------------------------
+         İlk Render
+      ------------------------------------------------------------------*/
       render();
     })();
   </script>
